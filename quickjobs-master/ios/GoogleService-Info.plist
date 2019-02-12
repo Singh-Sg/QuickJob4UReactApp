@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>701450046028-0j022b8juiddqumph061dsalm9lmo2d0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.701450046028-0j022b8juiddqumph061dsalm9lmo2d0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBd_R35cRek3aiJ95DvfYlI9odmu1fJOxo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>701450046028</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.QuickJobs4u</string>
+	<key>PROJECT_ID</key>
+	<string>quickjobs4u-c9152</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quickjobs4u-c9152.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:701450046028:ios:43c6351ccdd8cd35</string>
+	<key>DATABASE_URL</key>
+	<string>https://quickjobs4u-c9152.firebaseio.com</string>
+</dict>
+</plist>
