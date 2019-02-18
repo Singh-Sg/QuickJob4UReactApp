@@ -76,5 +76,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app would like to use your camera.</string>
 </dict>
 </plist>
