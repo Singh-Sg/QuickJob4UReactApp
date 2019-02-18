@@ -24,6 +24,8 @@ import { postFormData, removeMyJobsScreen } from '../../../config/formHandler';
 import StateManager from '../../StateManager';
 import { Header } from 'react-native-elements';
 var FileUpload = require('NativeModules').FileUpload
+import RNFetchBlob from 'react-native-fetch-blob';
+
 
 export default class ProfilePro extends Component {
   constructor(props){
@@ -168,10 +170,10 @@ export default class ProfilePro extends Component {
       }
       else {
         let source = { uri: response.uri };
-    
+        let ret = String(response.uri).replace('file:///','');
         this.setState({
           avatarSource: source,
-          avatarURL: Platform.OS == 'android' ? response.path : response.uri
+          avatarURL: Platform.OS == 'android' ? response.path : ret
         }, () => {
           this.uploadPicture()
         });
@@ -180,33 +182,31 @@ export default class ProfilePro extends Component {
   }
 
   uploadPicture(){
-    var obj = {
-        uploadUrl: 'https://quickjobs4u.com.au/api/home/customerProfilePic',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-        },
-        fields: {
-          'id': String(this.state.user_real_id),
-        },
-        files: [{
-          name: 'image',
-          filename: 'file.jpg',
-          filepath: this.state.avatarURL,
-          extension: 'image/jpeg'
-        }]
-    };
-    console.log(obj)
-    FileUpload.upload(obj, (err, result) => {
-      if(JSON.parse(result.data).code == 0){
-        alert(JSON.parse(result.data).message)
+
+    let form_data = [
+      { name : 'id', data : String(this.state.user_real_id)},
+    ]
+    if(this.state.avatarURL){
+      form_data.push({
+        name: 'image',
+        filename: 'file.jpeg',
+        data: RNFetchBlob.wrap(this.state.avatarURL),
+        type: 'image/jpeg'
+      })
+    }
+    RNFetchBlob.fetch('POST', 'https://quickjobs4u.com.au/api/home/customerProfilePic', { 
+        'Content-Type' : 'multipart/form-data', 
+    }, form_data).then((res) => {
+      if(JSON.parse(res.data).code == 0){
+        alert(JSON.parse(res.data).message)
       }else {
-        onSignIn(JSON.parse(result.data).data)
+        onSignIn(JSON.parse(res.data).data)
       }
+    })
       this.setState({
         avatarLoading: false
       })
-    })
+
   }
 
   changeCoverPic(){
@@ -241,10 +241,10 @@ export default class ProfilePro extends Component {
       }
       else {
         let source = { uri: response.uri };
-    
+        let ret = String(response.uri).replace('file:///','');
         this.setState({
           coverImageSource: source,
-          coverImageURL: Platform.OS == 'android' ? response.path : response.uri
+          coverImageURL: Platform.OS == 'android' ? response.path : ret
         }, () => {
           this.uploadCoverPicture()
         });
@@ -253,32 +253,30 @@ export default class ProfilePro extends Component {
   }
 
   uploadCoverPicture(){
-    var obj = {
-        uploadUrl: 'https://quickjobs4u.com.au/api/home/changeCoverPic',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-        },
-        fields: {
-          'id': String(this.state.user_real_id),
-        },
-        files: [{
-          name: 'image',
-          filename: 'file.jpg',
-          filepath: this.state.coverImageURL,
-          extension: 'image/jpeg'
-        }]
-    };
-    FileUpload.upload(obj, (err, result) => {
-      if(JSON.parse(result.data).code == 0){
-        alert(JSON.parse(result.data).message)
-      }else {
-        onSignIn(JSON.parse(result.data).data)
-      }
-      this.setState({
-        coverImageLoading: false
+
+    let form_data = [
+      { name : 'id', data : String(this.state.user_real_id)},
+    ]
+    if(this.state.coverImageURL){
+      form_data.push({
+        name: 'image',
+        filename: 'file.jpeg',
+        data: RNFetchBlob.wrap(this.state.coverImageURL),
+        type: 'image/jpeg'
       })
+    }
+    RNFetchBlob.fetch('POST', 'https://quickjobs4u.com.au/api/home/changeCoverPic', { 
+        'Content-Type' : 'multipart/form-data', 
+    }, form_data).then((res) => {
+      if(JSON.parse(res.data).code == 0){
+        alert(JSON.parse(res.data).message)
+      }else {
+        onSignIn(JSON.parse(res.data).data)
+      }
     })
+      this.setState({
+        avatarLoading: false
+      })
   }
 
   signOut(){
